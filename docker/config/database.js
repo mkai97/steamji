@@ -1,21 +1,12 @@
-const { parse } = require('pg-connection-string');
-
-module.exports = ({ env }) => {
-  // 解析数据库连接字符串
-  const connection = parse(env('DATABASE_URL'));
-  
-  return {
+// 使用环境变量 DATABASE_URL 直接配置数据库
+// Strapi会自动解析 DATABASE_URL 环境变量
+module.exports = ({ env }) => ({
+  connection: {
+    client: 'postgres',
     connection: {
-      client: 'postgres',
-      connection: {
-        host: connection.host,
-        port: connection.port,
-        database: connection.database,
-        user: connection.user,
-        password: connection.password,
-        ssl: env.bool('DATABASE_SSL', false),
-      },
-      debug: false,
+      connectionString: env('DATABASE_URL'),
+      ssl: false,
     },
-  };
-};
+    debug: false,
+  },
+});
