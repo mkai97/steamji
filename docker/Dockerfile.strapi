@@ -5,23 +5,32 @@ WORKDIR /app
 
 # 复制 package.json 和 package-lock.json（已移动到后面）
 
+# 复制服务器源代码（不包括config目录）
+COPY server/package*.json ./
+
 # 安装依赖
 RUN npm ci --only=production
+COPY server/src/ ./src/
+COPY server/public/ ./public/
+COPY server/scripts/ ./scripts/
+# 复制Strapi特定目录（这些目录在src下）
+COPY server/src/admin/ ./src/admin/
+COPY server/src/api/ ./src/api/
+COPY server/src/constants/ ./src/constants/
+COPY server/src/extensions/ ./src/extensions/
+COPY server/src/plugins/ ./src/plugins/
 
-# 复制服务器源代码（不包括config目录）
-COPY ../server/package*.json ./
-COPY ../server/src/ ./src/
-COPY ../server/public/ ./public/
-COPY ../server/scripts/ ./scripts/
-COPY ../server/types/ ./types/
-COPY ../server/admin/ ./admin/
-COPY ../server/api/ ./api/
-COPY ../server/components/ ./components/
-COPY ../server/extensions/ ./extensions/
-COPY ../server/plugins/ ./plugins/
-
-# 复制数据库配置文件（PostgreSQL配置）
+# 复制数据库配置文件（PostgreSQL配置）- 覆盖SQLite配置
 COPY docker/config/database.js ./config/database.js
+
+# 复制服务器配置文件
+COPY docker/config/server.js ./config/server.js
+
+# 复制管理员配置文件
+COPY docker/config/admin.js ./config/admin.js
+
+# 复制ASF配置文件
+COPY server/asf/ ./asf/
 
 # 构建 Strapi 应用
 RUN npm run build
