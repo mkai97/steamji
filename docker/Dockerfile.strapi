@@ -12,7 +12,7 @@ RUN npm ci --only=production
 # 复制服务器源代码
 COPY server/ ./
 
-# 复制数据库配置文件
+# 复制数据库配置文件（覆盖原有的SQLite配置）
 COPY docker/config/database.js ./config/database.js
 
 # 构建 Strapi 应用

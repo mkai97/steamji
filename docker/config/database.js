@@ -1,4 +1,4 @@
-// 直接配置数据库连接，禁用SSL
+// Docker环境专用PostgreSQL配置
 module.exports = ({ env }) => ({
   connection: {
     client: 'postgres',

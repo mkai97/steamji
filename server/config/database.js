@@ -1,16 +1,12 @@
-// 使用 PostgreSQL 数据库配置
+const path = require('path');
+
 module.exports = ({ env }) => ({
   connection: {
-    client: 'postgres',
+    client: 'sqlite',
     connection: {
-      host: env('DATABASE_HOST', 'postgres'),
-      port: env.int('DATABASE_PORT', 5432),
-      database: env('DATABASE_NAME', 'steamji'),
-      user: env('DATABASE_USERNAME', 'steamji'),
-      password: env('DATABASE_PASSWORD', ''),
-      ssl: false,
+      filename: path.join(__dirname, '..', env('DATABASE_FILENAME', '.tmp/data.db')),
     },
-    debug: false,
+    useNullAsDefault: true,
   },
 });
 
