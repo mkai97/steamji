@@ -14,7 +14,7 @@ services:
       - postgres_data:/var/lib/postgresql/data
       - ./init-scripts:/docker-entrypoint-initdb.d
     ports:
-      - "5432:5432"
+      - "${POSTGRES_EXTERNAL_PORT}:5432"
     networks:
       - steamji_network
     healthcheck:
@@ -33,7 +33,7 @@ services:
     environment:
       DATABASE_URL: postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB}
       HOST: ${STRAPI_HOST}
-      PORT: ${STRAPI_PORT}
+      PORT: 1337
       APP_KEYS: ${APP_KEYS}
       API_TOKEN_SALT: ${API_TOKEN_SALT}
       ADMIN_JWT_SECRET: ${ADMIN_JWT_SECRET}
@@ -52,7 +52,7 @@ services:
       - strapi_uploads:/app/public/uploads
       - strapi_data:/app/.tmp
     ports:
-      - "${STRAPI_PORT}:${STRAPI_PORT}"
+      - "${STRAPI_EXTERNAL_PORT}:1337"
     depends_on:
       postgres:
         condition: service_healthy
@@ -72,11 +72,12 @@ services:
     environment:
       ASF_CONFIG_PATH: ${ASF_CONFIG_PATH}
       ASPNETCORE_URLS: http://*:1242
+      ASF_IPC_PASSWORD: ${ASF_IPC_PASSWORD}
     volumes:
       - asf_config:${ASF_CONFIG_PATH}
       - ./asf-config:/tmp/asf-config
     ports:
-      - "${ASF_PORT}:1242"
+      - "${ASF_EXTERNAL_PORT}:1242"
     networks:
       - steamji_network
     healthcheck:
