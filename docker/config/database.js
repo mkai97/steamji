@@ -1,10 +1,13 @@
-// 使用环境变量 DATABASE_URL 直接配置数据库
-// Strapi会自动解析 DATABASE_URL 环境变量
+// 直接配置数据库连接，禁用SSL
 module.exports = ({ env }) => ({
   connection: {
     client: 'postgres',
     connection: {
-      connectionString: env('DATABASE_URL'),
+      host: env('DATABASE_HOST', 'postgres'),
+      port: env.int('DATABASE_PORT', 5432),
+      database: env('DATABASE_NAME', 'steamji'),
+      user: env('DATABASE_USERNAME', 'steamji'),
+      password: env('DATABASE_PASSWORD', ''),
       ssl: false,
     },
     debug: false,
