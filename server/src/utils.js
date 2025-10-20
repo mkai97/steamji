@@ -1,11 +1,12 @@
 const CryptoJS = require('crypto-js');
 const dayjs = require('dayjs');
 const axios = require('axios');
-const asfConfig = require('../asf/ASF.json');
+const asfConfig = require('../asf-config/ASF.json');
 
 const asfClient = axios.create({
+  baseURL: 'http://asf:1242/Api',
   headers: {
-    Authentication: asfConfig.IPCPassword,
+    'Authentication': asfConfig.IPCPassword,
   },
 });
 
