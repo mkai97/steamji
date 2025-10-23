@@ -1,4 +1,4 @@
-export const BASE_URL = process.env.NODE_ENV === 'development' ? 'http://127.0.0.1/api' : 'https://exmaple.com/api';
+export const BASE_URL = process.env.NODE_ENV === 'development' ? 'http://127.0.0.1:1337/api' : 'https://exmaple.com/api';
 
 export const LOGIN = process.env.TARO_ENV === 'qq' ? '/qqlogin' : '/wxlogin';
 

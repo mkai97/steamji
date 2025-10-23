@@ -112,32 +112,47 @@ const formatBotStatus = (info) => {
 };
 
 const findBot = async (uid, address) => {
-  let addressOrError = address;
-  if (!addressOrError) {
-    addressOrError = await getBotAddress(uid);
-    if (typeof addressOrError !== "string") {
-      return addressOrError;
-    }
-  }
   try {
+    console.log('[BOT SERVICE DEBUG]: findBot called with uid:', uid, 'address:', address);
+    let addressOrError = address;
+    if (!addressOrError) {
+      console.log('[BOT SERVICE DEBUG]: Getting bot address from database');
+      addressOrError = await getBotAddress(uid);
+      console.log('[BOT SERVICE DEBUG]: Bot address result:', JSON.stringify(addressOrError, null, 2));
+      if (typeof addressOrError !== "string") {
+        console.log('[BOT SERVICE DEBUG]: Address error detected:', addressOrError.code);
+        return addressOrError; // 返回bot不存在的错误
+      }
+    }
+    
+    console.log('[BOT SERVICE DEBUG]: Making ASF API call to:', getAbsoluteUrl(addressOrError, `${ASF_BOT}/${getBotName(uid)}`));
     const res = await asfClient.get(
       getAbsoluteUrl(addressOrError, `${ASF_BOT}/${getBotName(uid)}`)
     );
+    console.log('[BOT SERVICE DEBUG]: ASF API response:', JSON.stringify(res?.data, null, 2));
+    
     if (res.data.Success) {
       const result = res.data.Result;
+      console.log('[BOT SERVICE DEBUG]: ASF API call successful');
       return {
         code: 10000,
         data: formatBotStatus(result?.[uid]),
       };
     }
-    console.error("[ASF RES ERROR]: ", res.data);
+    
+    console.error("[BOT SERVICE DEBUG]: ASF RES ERROR: ", res.data);
+    return {
+      code: 20001,
+      message: "应用服务发生错误",
+    };
   } catch (err) {
-    console.error("[ASF ERROR]: ", err.message);
+    console.error("[BOT SERVICE DEBUG]: ASF ERROR: ", err.message);
+    console.error("[BOT SERVICE DEBUG]: Error stack: ", err.stack);
+    return {
+      code: 20001,
+      message: "应用服务发生错误",
+    };
   }
-  return {
-    code: 20001,
-    message: "应用服务发生错误",
-  };
 };
 
 const createOrUpdateBot = async (uid, steam) => {

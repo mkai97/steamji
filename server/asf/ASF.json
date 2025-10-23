@@ -1,4 +1,7 @@
 {
   "CurrentCulture": "zh-CN",
-  "IPCPassword": "rjeaoirtbafaa90a2-57af-ax-1.4"
+  "IPCPassword": "rjeaoirtbafaa90a2-57af-ax-1.4",
+  "IPCPrefixes": [
+    "http://*:1242/"
+  ]
 }

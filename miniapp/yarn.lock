@@ -1612,10 +1612,10 @@
   resolved "https://mirrors.cloud.tencent.com/npm/@stencil%2fcore/-/core-2.22.2.tgz"
   integrity sha512-r+vbxsGNcBaV1VDOYW25lv4QfXTlNoIb5GpUX7rZ+cr59yqYCZC5tlV+IzX6YgHKW62ulCc9M3RYtTfHtNbNNw==
 
-"@swc/core-win32-x64-msvc@1.3.32":
+"@swc/core-darwin-arm64@1.3.32":
   version "1.3.32"
-  resolved "https://mirrors.cloud.tencent.com/npm/@swc%2fcore-win32-x64-msvc/-/core-win32-x64-msvc-1.3.32.tgz"
-  integrity sha512-DPMoneNFQco7SqmVVOUv1Vn53YmoImEfrAPMY9KrqQzgfzqNTuL2JvfxUqfAxwQ6pEKYAdyKJvZ483rIhgG9XQ==
+  resolved "https://mirrors.cloud.tencent.com/npm/@swc%2fcore-darwin-arm64/-/core-darwin-arm64-1.3.32.tgz"
+  integrity sha512-o19bhlxuUgjUElm6i+QhXgZ0vD6BebiB/gQpK3en5aAwhOvinwr4sah3GqFXsQzz/prKVDuMkj9SW6F/Ug5hgg==
 
 "@swc/core@^1.0.46", "@swc/core@^1.3.23":
   version "1.3.32"
@@ -5773,6 +5773,11 @@ es6-error@^4.1.1:
   resolved "https://registry.npmmirror.com/es6-error/-/es6-error-4.1.1.tgz"
   integrity sha512-Um/+FxMr9CISWh0bi5Zv0iOD+4cFh5qLeks1qhAopKVAJw3drgKbKySikp7wGhDL0HPeaja0P5ULZrxLkniUVg==
 
+esbuild-darwin-arm64@0.14.54:
+  version "0.14.54"
+  resolved "https://registry.npmmirror.com/esbuild-darwin-arm64/-/esbuild-darwin-arm64-0.14.54.tgz"
+  integrity sha512-OPafJHD2oUPyvJMrsCvDGkRrVCar5aVyHfWGQzY1dWnzErjrDuSETxwA2HSsyg2jORLY8yBfzc1MIpUkXlctmw==
+
 esbuild-loader@2.18.0:
   version "2.18.0"
   resolved "https://registry.npmmirror.com/esbuild-loader/-/esbuild-loader-2.18.0.tgz"
@@ -5784,11 +5789,6 @@ esbuild-loader@2.18.0:
     loader-utils "^2.0.0"
     tapable "^2.2.0"
     webpack-sources "^2.2.0"
-
-esbuild-windows-64@0.14.54:
-  version "0.14.54"
-  resolved "https://registry.npmmirror.com/esbuild-windows-64/-/esbuild-windows-64-0.14.54.tgz"
-  integrity sha512-AoHTRBUuYwXtZhjXZbA1pGfTo8cJo3vZIcWGLiUcTNgHpJJMC1rVA44ZereBHMJtotyN71S8Qw0npiCIkW96cQ==
 
 esbuild@^0.14.27, esbuild@^0.14.6:
   version "0.14.54"
@@ -6814,6 +6814,11 @@ fs.realpath@^1.0.0:
   version "1.0.0"
   resolved "https://registry.npmmirror.com/fs.realpath/-/fs.realpath-1.0.0.tgz"
   integrity sha512-OO0pH2lK6a0hZnAdau5ItzHPI6pUlvI7jMVnxUQRtw4owF2wk8lOSabtGDCTP4Ggrg2MbGnWO9X8K1t4+fGMDw==
+
+fsevents@^2.1.2, fsevents@~2.3.2:
+  version "2.3.2"
+  resolved "https://registry.npmmirror.com/fsevents/-/fsevents-2.3.2.tgz"
+  integrity sha512-xiqMQR4xAeHTuB9uWm+fFRcIOgKBMiOBP+eXiyT7jsgVCq1bkVygt00oASowB7EdtpOHaaPgKt812P9ab+DDKA==
 
 function-bind@^1.1.1:
   version "1.1.1"
@@ -8865,10 +8870,10 @@ levn@^0.4.1:
     prelude-ls "^1.2.1"
     type-check "~0.4.0"
 
-lightningcss-win32-x64-msvc@1.15.1:
+lightningcss-darwin-arm64@1.15.1:
   version "1.15.1"
-  resolved "https://registry.npmmirror.com/lightningcss-win32-x64-msvc/-/lightningcss-win32-x64-msvc-1.15.1.tgz"
-  integrity sha512-wHGJZnCmHU14cL3mmVNZm1yDz55m8EKxwPhACZTq+/QOvLMeIXQ4qLvNzdvtVL5KESPwz4hjYsYsSNCtpcTfOA==
+  resolved "https://registry.npmmirror.com/lightningcss-darwin-arm64/-/lightningcss-darwin-arm64-1.15.1.tgz"
+  integrity sha512-4bqe9OCWzj8gPgwzpDK7TPopIoKx9CQMPVN83/+T5LVLkh9sSS0ltZLjAFI399GIkC6idl6rguUQ5qPeq4yxsQ==
 
 lightningcss@^1.14.0:
   version "1.15.1"

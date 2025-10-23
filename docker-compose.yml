@@ -1,0 +1,33 @@
+services:
+  # PostgreSQL 数据库服务
+  postgres:
+    image: postgres:14-alpine
+    container_name: steamji_postgres
+    env_file:
+      - ./server/.env
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-steamji}
+      POSTGRES_USER: ${POSTGRES_USER:-steamji}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-123456}
+    ports:
+      - "${POSTGRES_EXTERNAL_PORT:-5432}:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./server/database/migrations:/docker-entrypoint-initdb.d
+    restart: unless-stopped
+
+  # ASF (ArchiSteamFarm) 服务
+  asf:
+    image: justarchi/archisteamfarm:latest
+    container_name: steamji_asf
+    ports:
+      - "${ASF_EXTERNAL_PORT:-1242}:1242"
+    volumes:
+      - ./server/asf:/app/config
+    restart: unless-stopped
+
+volumes:
+  postgres_data:
+    driver: local
+  asf_data:
+    driver: local

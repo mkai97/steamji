@@ -78,6 +78,7 @@ const createWSClient = async (emitter) => {
     const ws = new WebSocket(`${address}${ASF_LOG}?password=${asfConfig.IPCPassword}`);
     ws.on("close", () => {
       console.log('[ASF WS CLOSED]: ', address);
+      console.log('[ASF WS CLOSED]: ', address, ASF_LOG , asfConfig.IPCPassword);
       if (timer) {
         return;
       }
@@ -101,10 +102,24 @@ const createWSClient = async (emitter) => {
       is_valid: true,
     },
   });
-  servers.forEach(server => {
-    const address = server.address.replace(/^https?/, 'ws');
-    connect(address);
-  });
+  
+  // 如果没有服务器配置，使用默认配置
+  if (servers.length === 0) {
+    console.log('[ASF WS CONNECT]:', '使用默认ASF连接地址: localhost:1242');
+    connect('ws://localhost:1242');
+  } else {
+    servers.forEach(server => {
+      // 确保地址以 http:// 或 https:// 开头
+      let address = server.address;
+      if (!address.startsWith('http://') && !address.startsWith('https://')) {
+        address = 'http://' + address;
+      }
+      // 修复端口号：从2222改为1242
+      address = address.replace(':2222', ':1242');
+      const wsAddress = address.replace(/^https?/, 'ws');
+      connect(wsAddress);
+    });
+  }
 };
 
 const logIntoDBRealTime = async () => {
